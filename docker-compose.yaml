@@ -1,0 +1,23 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    environment:
+      - SERVER_HOST=client-envoy
+
+  client-envoy:
+    build:
+      context: .
+      dockerfile: client-envoy.Dockerfile
+
+  server-envoy:
+    build:
+      context: .
+      dockerfile: server-envoy.Dockerfile
+
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
