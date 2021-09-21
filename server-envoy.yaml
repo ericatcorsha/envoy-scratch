@@ -22,15 +22,19 @@ static_resources:
               domains:
               - "*"
               routes:
-              - match:
-                  connect_matcher:
-                    {}
-                route:
-                  cluster: server
-                  upgrade_configs:
-                  - upgrade_type: CONNECT
-                    connect_config:
-                      {}
+                - match:
+                    prefix: "/"
+                    headers:
+                    - name: ":method"
+                      string_match:
+                        exact: "POST"
+                  route:
+                    cluster: server
+                    upgrade_configs:
+                    - upgrade_type: CONNECT
+                      connect_config:
+                        allow_post: true
+
           http_filters:
           - name: envoy.filters.http.router
           http_protocol_options: {}

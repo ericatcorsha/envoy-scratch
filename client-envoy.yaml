@@ -20,6 +20,7 @@ static_resources:
           cluster: "server"
           tunneling_config:
             hostname: server:1312
+            use_post: true
   clusters:
     - name: server
       connect_timeout: 30s
